@@ -4,7 +4,12 @@ document.querySelector('#search').addEventListener('input', function (event) {
     let query = event.target.value;
     if (query.trim() === '') {
         container.innerHTML = '';
-    } else {
+        return;
+    }
+
+    let throttleTimeout = window.setTimeout(function () {
+        window.clearTimeout(throttleTimeout);
+
         let url = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=' + query;
         fetch(url)
             .then(function (response) {
@@ -15,5 +20,5 @@ document.querySelector('#search').addEventListener('input', function (event) {
                 let links = json[3];
                 render(container, titles, links);
             });
-    }
+    }, 1000);
 });
