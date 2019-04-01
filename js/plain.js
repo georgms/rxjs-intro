@@ -1,3 +1,5 @@
+let throttleTimeout = undefined;
+
 document.querySelector('#search').addEventListener('input', function (event) {
     let controller = new AbortController();
     let signal = controller.signal;
@@ -12,9 +14,8 @@ document.querySelector('#search').addEventListener('input', function (event) {
         return;
     }
 
-    let throttleTimeout = window.setTimeout(function () {
-        window.clearTimeout(throttleTimeout);
-
+    window.clearTimeout(throttleTimeout);
+    throttleTimeout = window.setTimeout(function () {
         let url = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=' + query;
         currentRequest = fetch(url, {signal})
             .then(function (response) {
