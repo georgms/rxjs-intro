@@ -3,8 +3,6 @@ let throttleTimeout = undefined;
 document.querySelector('#search').addEventListener('input', function (event) {
     let container = document.querySelector('#output');
 
-    document.querySelector('#spinner').style.display = 'none';
-
     let query = event.target.value;
     if (query.trim() === '') {
         container.innerHTML = '';
@@ -13,6 +11,8 @@ document.querySelector('#search').addEventListener('input', function (event) {
 
     window.clearTimeout(throttleTimeout);
     throttleTimeout = window.setTimeout(function () {
+        document.querySelector('#spinner').style.display = 'block';
+
         let url = 'proxy.php?action=opensearch&origin=*&time=' + new Date().getTime() + '&search=' + query;
         fetch(url)
             .then(function (response) {
