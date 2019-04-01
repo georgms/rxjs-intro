@@ -12,6 +12,7 @@ document.querySelector('#search').addEventListener('input', function (event) {
 
     window.clearTimeout(throttleTimeout);
     throttleTimeout = window.setTimeout(function () {
+        document.querySelector('#spinner').style.display = 'block';
 
         previousController.abort();
         let controller = previousController = new AbortController();
@@ -26,6 +27,8 @@ document.querySelector('#search').addEventListener('input', function (event) {
                 let titles = json[1];
                 let links = json[3];
                 render(container, titles, links);
+
+                document.querySelector('#spinner').style.display = 'none';
             })
             .catch(function (error) {
                 if (error.name === 'AbortError') {
