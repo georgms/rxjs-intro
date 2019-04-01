@@ -11,7 +11,7 @@ document.querySelector('#search').addEventListener('input', function (event) {
 
     window.clearTimeout(throttleTimeout);
     throttleTimeout = window.setTimeout(function () {
-        let url = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=' + query;
+        let url = 'proxy.php?action=opensearch&origin=*&time=' + new Date().getTime() + '&search=' + query;
         fetch(url)
             .then(function (response) {
                 return response.json();
