@@ -14,11 +14,16 @@
 <body>
 <div class="container">
     <div class="row py-3">
-        <div class="col-12">
+        <div class="col-11">
             <form>
                 <input id="search" name="search" style="width: 100%;" type="search">
             </form>
             <div id="output"></div>
+        </div>
+        <div class="col-1">
+            <div class="spinner-border" id="spinner" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
 </div>
