@@ -4,8 +4,10 @@ document.querySelector('#search').addEventListener('input', function (event) {
     let query = event.target.value;
     if (query.trim() === '') {
         container.innerHTML = '';
-    } else {
-        let url = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=' + query;
+        return;
+    }
+
+    let url = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=' + query;
         fetch(url)
             .then(function (response) {
                 return response.json();
@@ -15,5 +17,4 @@ document.querySelector('#search').addEventListener('input', function (event) {
                 let links = json[3];
                 render(container, titles, links);
             });
-    }
 });
