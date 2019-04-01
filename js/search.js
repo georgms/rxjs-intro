@@ -1,6 +1,8 @@
 document.querySelector('#search').addEventListener('input', function (event) {
     let container = document.querySelector('#output');
 
+    document.querySelector('#spinner').style.display = 'block';
+
     let query = event.target.value;
     if (query.trim() === '') {
         container.innerHTML = '';
@@ -16,5 +18,7 @@ document.querySelector('#search').addEventListener('input', function (event) {
             let titles = json[1];
             let links = json[3];
             render(container, titles, links);
+
+            document.querySelector('#spinner').style.display = 'none';
         });
 });
