@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 
-    <title>reveal.js</title>
+    <title>RxJS Intro</title>
 
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/reveal.css" rel="stylesheet">
@@ -24,11 +24,372 @@
 </head>
 <body>
 <div class="reveal">
-    <div class="footer-bar"
-         style="position: absolute; bottom: 0; right: 200px; width: 200px; height: 10px; background-color: #ff8c00;"></div>
+    <div class="footer-bar"></div>
     <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
+        <section>
+            <section data-markdown>
+            <textarea data-template>
+                ## RxJS Intro
+
+                ![rxjs](https://rxjs-dev.firebaseapp.com/generated/images/marketing/home/Rx_Logo-512-512.png)
+            </textarea>
+            </section>
+
+            <section data-markdown>
+            <textarea data-template>
+                # ME
+
+                * [Georg M. Sorst](mailto:g.sorst@findologic.com)
+                * [@piefke_schorsch](https://twitter.com/piefke_schorsch)
+                * CTO @ ![FINDOLOGIC(https://findologic.com)](images/findologic.png)
+                <!-- .element: style="vertical-align: middle; height: 50px;" -->
+            </textarea>
+            </section>
+        </section>
+
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    # ReactiveX?
+
+                    > An API for asynchronous programming with observable streams
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # What?
+
+                    * Implementation of observer pattern
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Observer pattern?
+
+                    <span>Observable</span><!-- .element: class="fragment" width="250" data-fragment-index="1" -->
+                    <span>&rarr; Subscription</span>
+                    <!-- .element: class="fragment" width="250" data-fragment-index="2" -->
+                    <span>&rarr; Observer</span><!-- .element: class="fragment" width="250" data-fragment-index="3" -->
+
+                    <span><!-- .element: class="fragment" data-fragment-index="1" -->
+                    ![youtuber](images/youtuber.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
+                    </span>
+                    <span><!-- .element: class="fragment" data-fragment-index="2" -->
+                    &rarr;
+                    ![subscribe](images/subscribe.png)<!-- .element: width="250" style="vertical-align: middle"; -->
+                    </span>
+                    <span><!-- .element: class="fragment" data-fragment-index="3" -->
+                    &rarr;
+                    ![audience](images/audience.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
+                    </span>
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Observer pattern
+
+                    ```javascript
+                    /* Observable   */ element
+                    /* Subscription */   .addEventListener('click',
+                    /* Observer     */     function() {…});
+                    ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Observable?
+
+                    * Anything that emits value(s)
+                        * Promises
+                        * DOM events
+                        * Timers
+                        * Arrays
+                        * …
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Observable?
+
+                    * Everything is a stream
+                    * Even if it just emits a single value
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Subscription?
+
+                    * Compose and transform streams
+                    * Filter, map, zip, …
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Observer?
+
+                    * Actually does something
+                    * Render, upload, store, …
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Code pls
+
+                    ```javascript
+                    rxjs.fromEvent(element, 'input').pipe(
+                        map(event => event.target.value),
+                        filter(value => value !== ''),
+                    ).subscribe(value => console.log(value));
+                    ```
+                </textarea>
+            </section>
+        </section>
+
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    # Why ReactiveX?
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Functional
+
+                    Operators are pure functions
+
+                    &darr;
+
+                    Clean, stateless code
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Versatile
+
+                    Lots of common operators built in
+
+                    &darr;
+
+                    Less code
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Asynchronous
+
+                    Free concurrency
+
+                    &darr;
+
+                    Fast code
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Support
+
+                    * Has implementations in all major languages
+                        * Even ![php](images/php.svg)<!-- .element: style="vertical-align: middle; height: 50px;" -->
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Why?
+
+                    * Great for asynchronous event driven architectures
+                        * ![nodejs](images/nodejs.svg)<!-- .element: style="vertical-align: middle; height: 50px;" -->
+                        * Browsers
+                </textarea>
+            </section>
+        </section>
+
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    # Operator overload
+
+                    104 operators built in:
+
+                    audit
+                    auditTime
+                    buffer
+                    bufferCount
+                    bufferTime
+                    bufferToggle
+                    bufferWhen
+                    catchError
+                    combineAll
+                    combineLatest
+                    concat
+                    concatAll
+                    concatMap
+                    concatMapTo
+                    count
+                    debounce
+                    debounceTime
+                    defaultIfEmpty
+                    delay
+                    delayWhen
+                    dematerialize
+                    distinct
+                    distinctUntilChanged
+                    distinctUntilKeyChanged
+                    elementAt
+                    endWith
+                    every
+                    exhaust
+                    exhaustMap
+                    expand
+                    filter
+                    finalize
+                    find
+                    findIndex
+                    first
+                    flatMap
+                    groupBy
+                    ignoreElements
+                    isEmpty
+                    last
+                    map
+                    mapTo
+                    materialize
+                    max
+                    merge
+                    mergeAll
+                    mergeMap
+                    mergeMapTo
+                    mergeScan
+                    min
+                    multicast
+                    observeOn
+                    onErrorResumeNext
+                    pairwise
+                    partition
+                    pluck
+                    publish
+                    publishBehavior
+                    publishLast
+                    publishReplay
+                    race
+                    reduce
+                    refCount
+                    repeat
+                    repeatWhen
+                    retry
+                    retryWhen
+                    sample
+                    sampleTime
+                    scan
+                    sequenceEqual
+                    share
+                    shareReplay
+                    single
+                    skip
+                    skipLast
+                    skipUntil
+                    skipWhile
+                    startWith
+                    subscribeOn
+                    switchAll
+                    switchMap
+                    switchMapTo
+                    take
+                    takeLast
+                    takeUntil
+                    takeWhile
+                    tap
+                    throttle
+                    throttleTime
+                    throwIfEmpty
+                    timeInterval
+                    timeout
+                    timeoutWith
+                    timestamp
+                    toArray
+                    window
+                    windowCount
+                    windowTime
+                    windowToggle
+                    windowWhen
+                    withLatestFrom
+                    zip
+                    zipAll
+
+                    <!-- .element: style="font-size: x-large;" -->
+
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # RX Marbles
+
+                    ![take](images/map-rxmarble.webp)
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # [take](https://rxmarbles.com/#take)<!-- .element: target="_blank" -->
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # [last](https://rxmarbles.com/#last)<!-- .element: target="_blank" -->
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # [filter](https://rxmarbles.com/#filter)<!-- .element: target="_blank" -->
+                </textarea>
+            </section>
+        </section>
+
+
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    # How?
+
+                    ![scared](images/scared.gif)
+
+                    Live demo time!
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Live demo
+
+                    Let's built a Wikipedia autocomplete!
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    1. Get search field value
+                    2. Display spinner
+                    3. Fetch suggestions
+                    4. Display spinner
+                    5. Display results
+                </textarea>
+            </section>
+        </section>
     </div>
 </div>
 
@@ -39,6 +400,7 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+        hash: true,
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
