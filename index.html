@@ -52,7 +52,7 @@
                 <textarea data-template>
                     # ReactiveX?
 
-                    > An API for asynchronous programming with observable streams
+                    > Reactive programming is an asynchronous programming paradigm concerned with data streams and the propagation of change
                 </textarea>
             </section>
 
@@ -60,7 +60,7 @@
                 <textarea data-template>
                     # What?
 
-                    * Implementation of observer pattern
+                    Implementation of observer pattern
                 </textarea>
             </section>
 
@@ -117,8 +117,13 @@
                 <textarea data-template>
                     # Observables
 
-                    * Everything is a stream
-                    * Even if it just emits a single value
+                    Everything is a stream
+
+                    ![stream](images/stream.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
+
+                    Even if it just emits a single value
+
+                    ![drop](images/drop.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
                 </textarea>
             </section>
 
@@ -146,12 +151,23 @@
 
             <section data-markdown>
                 <textarea data-template>
+                    # RxJS
+
+                    > RxJS (Reactive Extensions for JavaScript) is a library for reactive programming using observables that makes it easier to compose asynchronous or callback-based code
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
                     # Code pls
 
                     ```javascript
-                    rxjs.fromEvent(element, 'input').pipe(
+                    rxjs.fromEvent(element, 'keypress').pipe(
+
                         map(event => event.target.value),
+
                         filter(value => value !== ''),
+
                     ).subscribe(value => console.log(value));
                     ```
                 </textarea>
@@ -174,6 +190,8 @@
                     &darr;
 
                     Clean, stateless code
+
+                    ## `f(x) = y`
                 </textarea>
             </section>
 
@@ -181,11 +199,13 @@
                 <textarea data-template>
                     # Asynchronous
 
-                    Free concurrency
+                    Stateless functions are easy to run asynchronously
 
                     &darr;
 
-                    Fast code
+                    Great concurrency
+
+                    ![Sequential Concurrent](images/Sequential_Concurrent.png)
                 </textarea>
             </section>
 
@@ -205,7 +225,7 @@
                 <textarea data-template>
                     # Support
 
-                    * Has implementations in all major languages
+                    * ReactiveX has implementations in all major languages
                         * Even ![php](images/php.svg)<!-- .element: style="vertical-align: middle; height: 50px;" -->
                 </textarea>
             </section>
@@ -216,7 +236,7 @@
 
                     * Great for asynchronous event driven architectures
                         * ![nodejs](images/nodejs.svg)<!-- .element: style="vertical-align: middle; height: 50px;" -->
-                        * Browsers
+                        * Single page apps
                 </textarea>
             </section>
         </section>
@@ -340,6 +360,14 @@
 
             <section data-markdown>
                 <textarea data-template>
+                    # Finding the right operator
+
+                    Use [RxJS Operator Decision Tree](https://rxjs-dev.firebaseapp.com/operator-decision-tree) to find the right operator
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
                     # RX Marbles
 
                     ![take](images/map-rxmarble.webp)
@@ -389,41 +417,79 @@
                 <textarea data-template>
                     # Requirements
 
-                    1. Get search field value
-                    2. Display spinner
-                    3. Fetch suggestions
-                    4. Hide spinner
-                    5. Display results
+                    1. Listen to text input events
+                    2. Get search field value
+                    3. Display spinner
+                    4. Fetch suggestions
+                    5. Hide spinner
+                    6. Display results
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # Implement in plain Javascript
+                    # [Implement in plain Javascript](https://github.com/georgms/rxjs-intro/tree/plain_01a_spinner)
+                    <!-- .element: target="_blank" -->
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # Implement with RxJS
+                    # [Implement in RxJS](https://github.com/georgms/rxjs-intro/tree/rxjs_01e_spinner)<!-- .element: target="_blank" -->
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # Use lettable operators
+                    # [Use lettable operators](https://github.com/georgms/rxjs-intro/tree/rxjs_01c_lettable)
+                    <!-- .element: target="_blank" -->
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # Debounce
+                    # [Debounce](https://github.com/georgms/rxjs-intro/tree/rxjs_03_throttling)<!-- .element: target="_blank" -->
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # Cancel requests
+                    # [Cancel requests](https://github.com/georgms/rxjs-intro/tree/rxjs_04_request_cancel)<!-- .element: target="_blank" -->
+                </textarea>
+            </section>
+        </section>
+
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                    # Gotchas
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Subscribe!
+
+                    * Observables without subscription do nothing
+                    * Just like functions that are not called
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Handle errors!
+
+                    * Streams will stop once they throw an error
+                    * Handle error-prone actions (eg. fetching URL) in sub-stream
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # No branching!
+
+                    * Pipes run in a straight line
+                    * No conditionals / branching
                 </textarea>
             </section>
         </section>
