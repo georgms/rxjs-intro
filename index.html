@@ -69,17 +69,17 @@
                     # Observer pattern?
 
                     <span>Observable</span><!-- .element: class="fragment" width="250" data-fragment-index="1" -->
-                    <span>&rarr; Subscription</span><!-- .element: class="fragment" width="250" data-fragment-index="2" -->
-                    <span>&rarr; Observer</span><!-- .element: class="fragment" width="250" data-fragment-index="3" -->
+                    <span>&rarr; Subscription</span><!-- .element: class="fragment" width="250" data-fragment-index="3" -->
+                    <span>&rarr; Observer</span><!-- .element: class="fragment" width="250" data-fragment-index="5" -->
 
-                    <span><!-- .element: class="fragment" data-fragment-index="1" -->
+                    <span><!-- .element: class="fragment" data-fragment-index="2" -->
                     ![youtuber](images/youtuber.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
                     </span>
-                    <span><!-- .element: class="fragment" data-fragment-index="2" -->
+                    <span><!-- .element: class="fragment" data-fragment-index="4" -->
                     &rarr;
                     ![subscribe](images/subscribe.png)<!-- .element: width="250" style="vertical-align: middle"; -->
                     </span>
-                    <span><!-- .element: class="fragment" data-fragment-index="3" -->
+                    <span><!-- .element: class="fragment" data-fragment-index="6" -->
                     &rarr;
                     ![audience](images/audience.jpg)<!-- .element: width="250" style="vertical-align: middle"; -->
                     </span>
@@ -479,8 +479,11 @@
                 <textarea data-template>
                     # Handle errors!
 
-                    * Streams will stop once they throw an error
-                    * Handle error-prone actions (eg. fetching URL) in sub-stream
+                    Streams will stop once they throw an error
+
+                    ![complete_error](images/RxJS_complete_error.png)
+
+                    Handle error-prone actions (eg. fetching URL) in sub-stream
                 </textarea>
             </section>
 
@@ -490,6 +493,10 @@
 
                     * Pipes run in a straight line
                     * No conditionals / branching
+
+                    ![branching](images/RxJS_branching.png)
+                    <!-- .element: class="fragment strike-through fade-in fade-out" height="350" data-fragment-index="1" -->
+                    ![branching](images/RxJS_no_branching.png)<!-- .element: class="fragment" height="350" data-fragment-index="2" -->
                 </textarea>
             </section>
         </section>
