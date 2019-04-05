@@ -350,10 +350,10 @@ body {
 
 .strike-through {
     position: relative;
-    background: gray;
+    /*background: gray;*/
     padding: 30px;
     overflow: hidden;
-/ / hide overflow of pseudo elements
+    /* hide overflow of pseudo elements */
 }
 
 .strike-through:before, .strike-through:after {
@@ -365,7 +365,8 @@ body {
     height: 30px;
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
-/ / center the X vertically and horizontally: left: 0;
+    /* center the X vertically and horizontally: */
+    left: 0;
     right: 0;
     top: 0;
     bottom: 0;
