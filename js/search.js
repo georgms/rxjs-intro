@@ -1,8 +1,15 @@
-let throttleTimeout = undefined;
-let previousController = new AbortController();
+let container = document.querySelector('#output');
+let spinner = document.querySelector('#spinner');
+let searchField = document.querySelector('#search');
 
-document.querySelector('#search').addEventListener('input', function (event) {
-    let container = document.querySelector('#output');
+let debounceTimeout = undefined;
+let controller = new AbortController();
+
+searchField.addEventListener('input', event => {
+
+    /* Cancel existing request. */
+    controller.abort();
+    spinner.style.display = 'none';
 
     let query = event.target.value;
     if (query.trim() === '') {
@@ -10,30 +17,22 @@ document.querySelector('#search').addEventListener('input', function (event) {
         return;
     }
 
-    window.clearTimeout(throttleTimeout);
-    throttleTimeout = window.setTimeout(function () {
-        document.querySelector('#spinner').style.display = 'block';
+    window.clearTimeout(debounceTimeout);
+    debounceTimeout = window.setTimeout(() => {
+        spinner.style.display = 'block';
 
-        previousController.abort();
-        let controller = previousController = new AbortController();
-        let signal = previousController.signal;
+        controller = new AbortController();
+        let signal = controller.signal;
 
-        let url = 'proxy.php?action=opensearch&origin=*&time=' + new Date().getTime() + '&search=' + query;
+        let url = 'proxy.php?search=' + query;
         fetch(url, {signal})
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (json) {
+            .then(response => response.json())
+            .then(json => {
                 let titles = json[1];
                 let links = json[3];
                 render(container, titles, links);
 
-                document.querySelector('#spinner').style.display = 'none';
-            })
-            .catch(function (error) {
-                if (error.name === 'AbortError') {
-                    console.log('Request aborted');
-                }
-            })
+                spinner.style.display = 'none';
+            });
     }, 300);
 });
