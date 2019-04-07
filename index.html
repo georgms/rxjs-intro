@@ -607,21 +607,41 @@
                     Plain
 
                     ```javascript
-                    fetch(url)
-                        .then(function (json) {
-                            let titles = json[1];
-                            let links = json[3];
-                            render(container, titles, links);
-                        });
+                    fetch(url).then(json => {
+                        let titles = json[1];
+                        let links = json[3];
+                        render(container, titles, links);
+                    });
                     ```
 
                     RxJS
 
                     ```javascript
-                    rxjs.operators.switchMap(query => from(fetch(baseUrl + query))),
-                    rxjs.operators.map(json => ({'titles': json[1], 'links': json[3]})),
-                    rxjs.operators.tap(({titles, links}) => render(container, titles, links))
+                    let fetchSuggestions = rxjs.operators.switchMap(query => from(fetch(baseUrl + query)));
+                    let prepareResults = rxjs.operators.map(json => ({'titles': json[1], 'links': json[3]}));
+                    let renderResults = ({titles, links}) => render(container, titles, links);
+
+                    rxjsfromEvent(element, 'input').pipe(
+                        fetchSuggestions,
+                        preparedResults,
+                    ).subscribe(renderResults);
                     ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    # Full version
+
+                    ## Plain
+
+                    * [Demo](demo/plain/)
+                    * [Code](demo/plain/js/search.js)
+
+                    ## RxJS
+
+                    * [Demo](demo/rxjs/)
+                    * [Code](demo/rxjs/js/search.js)
                 </textarea>
             </section>
         </section>
