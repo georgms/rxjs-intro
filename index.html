@@ -427,42 +427,200 @@
 
                     1. Listen to text input events
                     2. Get search field value
-                    3. Display spinner
-                    4. Fetch suggestions
-                    5. Hide spinner
-                    6. Display results
+                    3. Filter out empty queries
+                    4. Debounce rapid typing
+                    5. Discard ongoing requests
+                    6. Display spinner
+                    7. Fetch suggestions
+                    8. Hide spinner
+                    9. Display results
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # [Implement in plain Javascript](https://github.com/georgms/rxjs-intro/tree/plain_01a_spinner)
-                    <!-- .element: target="_blank" -->
+                    ## Listen to text input events
+
+                    Plain
+
+                    <pre><code data-noescape data-trim>
+                    element.addEventListener('input', (event) => {});
+                    </code></pre>
+
+                    RxJS
+
+                    <pre><code data-noescape data-trim>
+                    rxjs.fromEvent(element, 'input').subscribe();
+                    </code></pre>
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # [Implement in RxJS](https://github.com/georgms/rxjs-intro/tree/rxjs_01e_spinner)<!-- .element: target="_blank" -->
+                    ## Get search field value
+
+                    Plain
+
+                    ```javascript
+                    let query = event.target.value.trim();
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.map(event => event.target.value.trim()
+                    ```
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # [Use lettable operators](https://github.com/georgms/rxjs-intro/tree/rxjs_01c_lettable)
-                    <!-- .element: target="_blank" -->
+                    ## Filter out empty queries
+
+                    Plain
+
+                    ```javascript
+                    if (query === '') {
+                        return;
+                    }
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.filter(query => query !== '')
+                    ```
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # [Debounce](https://github.com/georgms/rxjs-intro/tree/rxjs_03_throttling)<!-- .element: target="_blank" -->
+                    ## Debounce rapid typing
+
+                    Plain
+
+                    ```javascript
+                    window.clearTimeout(debounceTimeout);
+                    debounceTimeout = window.setTimeout(() {
+                        /* Handle query */
+                    }, 300);
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.debounce(() => rxjs.interval(300)),
+                    /* Handle query */
+                    ```
                 </textarea>
             </section>
 
             <section data-markdown>
                 <textarea data-template>
-                    # [Cancel requests](https://github.com/georgms/rxjs-intro/tree/rxjs_04_request_cancel)<!-- .element: target="_blank" -->
+                    ## Discard ongoing requests
+
+                    Plain
+
+                    ```javascript
+                    controller.abort();
+                    let controller = new AbortController();
+                    let signal = controller.signal;
+
+                    fetch(baseUrl + query, {signal}).then(
+                        /* Handle response */
+                    );
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.switchMap(query => from(fetch(baseUrl + query)),
+                    /* Handle response */
+                    ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Display spinner
+
+                    Plain
+
+                    ```javascript
+                    spinner.style.display = 'block';
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.tap(() => spinner.style.display = 'block')
+                    ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Fetch suggestions
+
+                    Plain
+
+                    ```javascript
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(/* Handle response */)
+                    );
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.switchMap(query => from(fetch(baseUrl + query)),
+                    rxjs.operators.switchMap(response => from(response.json()),
+                    /* Handle response */
+                    ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Display spinner
+
+                    Plain
+
+                    ```javascript
+                    spinner.style.display = 'none';
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.tap(() => spinner.style.display = 'none')
+                    ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Display results
+
+                    Plain
+
+                    ```javascript
+                    fetch(url)
+                        .then(function (json) {
+                            let titles = json[1];
+                            let links = json[3];
+                            render(container, titles, links);
+                        });
+                    ```
+
+                    RxJS
+
+                    ```javascript
+                    rxjs.operators.switchMap(query => from(fetch(baseUrl + query))),
+                    rxjs.operators.map(json => ({'titles': json[1], 'links': json[3]})),
+                    rxjs.operators.tap(({titles, links}) => render(container, titles, links))
+                    ```
                 </textarea>
             </section>
         </section>
