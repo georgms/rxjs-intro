@@ -5,6 +5,8 @@ let searchField = document.querySelector('#search');
 let debounceTimeout = undefined;
 let controller = new AbortController();
 
+let baseUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*';
+
 searchField.addEventListener('input', event => {
 
     /* Cancel existing request. */
@@ -17,14 +19,16 @@ searchField.addEventListener('input', event => {
         return;
     }
 
+    /* Reset debounce timer. */
     window.clearTimeout(debounceTimeout);
+
     debounceTimeout = window.setTimeout(() => {
         spinner.style.display = 'block';
 
         controller = new AbortController();
         let signal = controller.signal;
 
-        let url = 'proxy.php?search=' + query;
+        let url = baseUrl + '&_=' + new Date().getTime() + '&search=' + query;
         fetch(url, {signal})
             .then(response => response.json())
             .then(json => {
